@@ -86,4 +86,16 @@ class User extends BaseController
         $this->session->setFlashdata('success_msg', 'User has been deleted successfully.');
         return $this->response->redirect(site_url('/'));
     }
+
+    public function changeStatus()
+    {
+        $user_id = $this->request->getVar('user_id');
+        $newStatus = $this->request->getVar('status') == '1' ? '0' : '1';
+
+        $userModel = new UserModel();
+        $input_list = [
+            'status' => $newStatus,
+        ];
+        return $userModel->update($user_id, $input_list);
+    }
 }

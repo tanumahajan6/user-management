@@ -10,6 +10,7 @@
         <h2 class="page_title"><?= $page_title; ?></h2>
         <?= $this->renderSection('content') ?>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="<?php echo base_url('/css/user_management.css'); ?>" rel="stylesheet">
     </div>
 </body>
 </html>

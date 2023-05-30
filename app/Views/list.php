@@ -12,16 +12,14 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <?php endif ?>
-<a href="/create" class="btn btn-primary">Add New User</a>
+<a href="/create" class="btn btn-primary add-btn">Add New User</a>
 <!-- <br/>To do:<br/>
 7. Smart admin theme<br/>
 1. Server side validations<br/>
-2. Exception handling<br/>
 3. Image <br/>
 4. Coding standards<br/>
 5. Comments<br/>
-6. Documentation<br/>
-8. Push to git -->
+6. Documentation in Read md file<br/>-->
 
 
 <table class="user-list">
@@ -32,6 +30,7 @@
       <th scope="col">Last Name</th>
       <th scope="col">Email ID</th>
       <th scope="col">Mobile No.</th>
+      <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -44,6 +43,7 @@
           <td><?= $user['lastname'] ?></td>
           <td><?= $user['email_id'] ?></td>
           <td><?= $user['mobile_no'] ?></td>
+          <td><button href="#" class="btn btn-outline-info btn-sm change-status" data-status="<?= $user['status'] ?>" id="<?= $user['user_id']?>"><?= ($user['status'] == '1') ? 'Active' : 'Inactive'; ?></button></td>
           <td>
             <a href="<?= base_url('edit/'.$user['user_id']);?>" class="btn btn-info btn-sm">Edit</a>
             <a href="#" class="delete_user btn btn-danger btn-sm" id="<?= $user['user_id']; ?>" >Delete</a>

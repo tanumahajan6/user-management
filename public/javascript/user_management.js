@@ -28,6 +28,46 @@ $(document).ready(function(){
             });
         });
 
+        $(document).delegate('.change-status', 'click', function(e){
+            e.preventDefault();
+            let current_element = $(this);
+            let user_id = $(this).attr('id');
+            let current_status = $(this).text() == 'Active' ? '1' : '0';
+            Swal.fire({
+                title: 'Are you sure you want to change the status of this user?',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown animate__faster',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp animate__faster',
+                },
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                    $.post("change-status",
+                    {
+                        user_id: user_id,
+                        status: current_status
+                    },
+                    function(data, response){
+                        // alert("Data: " + data + "\nStatus: " + response);
+                        if(response == 'success'){
+                            if(current_status == '1'){
+                                current_element.text('Inactive');
+                            }else{
+                                current_element.text('Active');
+                            }
+                        }else{
+
+                        }
+                    });
+                });
+        });
+
     } else if(page_title == "Add User" || page_title == "Edit User"){
         validateForm();
     }
@@ -38,12 +78,14 @@ function validateForm(){
         e.preventDefault();
         $('.err-fname').text('');
         $('.err-lname').text('');
+        $('.err-status').text('');
         $('.err-email').text('');
         $('.err-mobile').text('');
         $('.err-password').text('');
         $('.err-confirm_password').text('');
         let firstname = $('.firstname').val();
         let lastname = $('.lastname').val();
+        let status = $('input[name="status"]:checked').val();
         let email = $('.email').val();
         let mobile = $('.mobile').val();
         let password = $('.password').val();
@@ -55,6 +97,10 @@ function validateForm(){
         }
         if(lastname == '' || lastname == null){
             $('.err-lname').text('Please enter last name.');
+            k++;
+        }
+        if(status == '' || status == null || status == 'undefined'){
+            $('.err-status').text('Please select status.');
             k++;
         }
         if(email == '' || email == null){

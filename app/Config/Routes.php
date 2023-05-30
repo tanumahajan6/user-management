@@ -35,6 +35,7 @@ $routes->post('submit-form', 'User::store');
 $routes->get('edit/(:num)', 'User::edit/$1');
 $routes->post('update', 'User::update');
 $routes->get('delete/(:num)', 'User::delete/$1');
+$routes->post('change-status', 'User::changeStatus');
 
 /*
  * --------------------------------------------------------------------
