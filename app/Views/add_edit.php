@@ -1,6 +1,8 @@
-<?= $this->extend('layouts/default') ?>
-<?= $this->section('content') ?>
-<?php helper('form');?>
+<?= $this->extend('layouts/default') ?>  <!-- Used the layout/default.php custom layout -->
+<?= $this->section('content') ?>         <!-- Actual content starts -->
+<?php helper('form');?>                  <!-- Used Form helper -->
+
+  <!-- Form start -->
     <form method="post" id="add_user" name="add_user" action="<?= isset($user['firstname']) ? site_url('/update') : site_url('/submit-form') ?>">
       <?php if(isset($user['user_id'])): ?>
         <input type="hidden" name="user_id" id="user_id" value="<?= $user['user_id']; ?>">
@@ -9,7 +11,7 @@
       <div class="form-group">
         <label>First Name</label>
         <input type="text" name="firstname" class="firstname form-control" value="<?= isset($user['firstname']) ? $user['firstname'] : ''; ?>"/>
-        <div class="err-fname err-msg"></div>
+        <div class="err-fname err-msg"></div>      <!-- Error div to display client side validation message -->
       </div>
 
       <div class="form-group">
@@ -60,13 +62,16 @@
         <div class="err-status err-msg"></div>
       </div>
 
+      <!-- Action buttons start -->
       <br>
       <div class="form-group">
         <button class="btn btn-primary" id="submit_user">Submit</button>
         <a href="/" class="btn btn-secondary">Cancel</a>
       </div>
+      <!-- Action buttons end -->
+
       </div>
     </form>
-
-<script src="<?php echo base_url('/javascript/user_management.js'); ?>"></script>
+<!-- Form end -->
+<script src="<?php echo base_url('/javascript/user_management.js'); ?>"></script>   <!-- Loaded custom js file -->
 <?= $this->endSection() ?>

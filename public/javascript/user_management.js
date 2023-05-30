@@ -2,12 +2,13 @@ $(document).ready(function(){
     let page_title = $('.page_title').text();
 
     if(page_title == "User List"){
-        $('.user-list').DataTable();
+        $('.user-list').DataTable();                //Initialize Datatable
 
+        //Delete user click start
         $('.delete_user').click(function(e){
             e.preventDefault();
             let id = $(this).attr('id');
-            Swal.fire({
+            Swal.fire({                             //Sweetalert confirmation popup
                 title: 'Are you sure you want to delete this user?',
                 text: "You won't be able to revert this!",
                 type: 'warning',
@@ -27,7 +28,9 @@ $(document).ready(function(){
                 }
             });
         });
+        //Delete user click end
 
+        //User status change start. Delete is used if the DOM element is altered, the click event should still work
         $(document).delegate('.change-status', 'click', function(e){
             e.preventDefault();
             let current_element = $(this);
@@ -48,31 +51,32 @@ $(document).ready(function(){
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes!'
             }).then((result) => {
+                if (result.value) {
                     $.post("change-status",
                     {
                         user_id: user_id,
                         status: current_status
                     },
                     function(data, response){
-                        // alert("Data: " + data + "\nStatus: " + response);
                         if(response == 'success'){
                             if(current_status == '1'){
                                 current_element.text('Inactive');
                             }else{
                                 current_element.text('Active');
                             }
-                        }else{
-
                         }
                     });
-                });
+                }
+            });
         });
+        //User status change end
 
     } else if(page_title == "Add User" || page_title == "Edit User"){
-        validateForm();
+        validateForm();                 //Client side validation on add & edit submit
     }
 });
 
+//validateForm() validates the entire form on click of submit and displays the error message as required
 function validateForm(){
     $('#submit_user').click(function(e){
         e.preventDefault();
@@ -135,6 +139,7 @@ function validateForm(){
     });
 }
 
+//isEmail() function checks the email ID provided in the parameter is valid
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
