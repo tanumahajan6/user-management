@@ -1,6 +1,8 @@
 This project consists of a User Management feature, where we can List, Create, Edit & Delete a user. 
 Technologies like Code Igniter 4, Bootstrap 5, jQuery, CSS and HTML are used to build this feature. 
 
+Git branch: user-management
+
 To run this project locally, we need to start Apache & MySQL services in XAMPP. 
 
 First, we need to create a database called 'users' in phpmyadmin. Next, we will need to import the users.sql file in 'users' database. This completes the Database structure creation.
